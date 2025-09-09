@@ -1,5 +1,5 @@
 model Teacher {
-  id     String @id @default(uuid())
+  id     String @id @default(uuid()) @db.Uuid
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique @default(uuid()) @map("user_id") @db.Uuid
 

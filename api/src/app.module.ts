@@ -5,6 +5,8 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UserModule } from './user/user.module'
 import { PrismaModule } from './prisma/prisma.module'
+import { StudentModule } from './student/student.module'
+import { SectionModule } from './section/section.module'
 import config from './config'
 
 @Module({
@@ -16,6 +18,8 @@ import config from './config'
       isGlobal: true,
       load: [config],
     }),
+    StudentModule,
+    SectionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

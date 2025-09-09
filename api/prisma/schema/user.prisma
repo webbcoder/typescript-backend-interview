@@ -3,6 +3,11 @@ model User {
   email    String  @unique
   password String?
 
+  role UserRole @default(STUDENT)
+
+  teacher Teacher?
+  student Student?
+
   createdAt DateTime @default(now()) @db.Timestamptz()
   updatedAt DateTime @updatedAt @db.Timestamptz()
 }

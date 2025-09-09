@@ -1,0 +1,21 @@
+model Section {
+  id          String    @id @default(uuid())
+  subject     Subject   @relation(fields: [subjectId], references: [id])
+  subjectId   String    @default(uuid()) @map("subject_id") @db.Uuid
+  teacher     Teacher   @relation(fields: [teacherId], references: [id])
+  teacherId   String    @default(uuid()) @map("teacher_id") @db.Uuid
+  classroom   Classroom @relation(fields: [classroomId], references: [id])
+  classroomId String    @default(uuid()) @map("classroom_id") @db.Uuid
+  startTime   DateTime  @db.Time(6)
+  endTime     DateTime  @db.Time(6)
+
+  days     SectionDay[]
+  students StudentSection[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+
+  @@index([teacherId])
+  @@index([classroomId])
+  @@index([startTime, endTime])
+}

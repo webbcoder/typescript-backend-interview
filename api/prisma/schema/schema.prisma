@@ -13,11 +13,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email    String @unique
-  password String?
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+}
 
-  createdAt DateTime  @default(now()) @db.Timestamptz()
-  updatedAt DateTime  @updatedAt @db.Timestamptz()
+enum DayOfWeek {
+  MON
+  TUE
+  WED
+  THU
+  FRI
+  SAT
+  SUN
 }

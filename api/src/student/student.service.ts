@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common'
 
-import { StudentEnrollDto, StudentUnenrollDto } from './dto'
+import { StudentEnrollDto } from './dto/student-enroll.dto'
 
 import { StudentRepository } from './student.repository'
 import { SectionRepository } from '../section/section.repository'
@@ -53,9 +53,9 @@ export class StudentService {
     })
   }
 
-  async unenroll(studentId: string, payload: StudentUnenrollDto) {
+  async unenroll(studentId: string, sectionId: string) {
     return this.sectionRepository.studentSectionDelete({
-      studentId_sectionId: { studentId, sectionId: payload.sectionId },
+      studentId_sectionId: { studentId, sectionId },
     })
   }
 

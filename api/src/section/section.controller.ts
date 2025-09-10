@@ -10,7 +10,7 @@ export class SectionController {
 
   @Get('all')
   async sections(@Query() params: PaginationDto) {
-    return this.sectionService.findall(params)
+    return this.sectionService.findAll(params)
   }
 
   @Get(':id')

@@ -19,7 +19,7 @@ export class SectionService {
     return this.repository.findUnique({ id })
   }
 
-  async findall(params: PaginationDto): Promise<SectionWithIncludes[]> {
+  async findAll(params: PaginationDto): Promise<SectionWithIncludes[]> {
     const { skip, take } = params
     const include = { subject: true, teacher: true, classroom: true, days: true }
     const orderBy: SectionOrderBy = [{ startTime: 'asc' }, { id: 'asc' }]

@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module'
 import { StudentModule } from './student/student.module'
 import { SectionModule } from './section/section.module'
 import { ClassroomModule } from './classroom/classroom.module'
+import { PdfModule } from './pdf/pdf.module'
 import config from './config'
 
 @Module({
@@ -22,6 +23,7 @@ import config from './config'
     StudentModule,
     SectionModule,
     ClassroomModule,
+    PdfModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,3 +12,9 @@ export function timeDateToMinutes(date: Date): number {
 export function intervalsOverlap(a: Interval, b: Interval) {
   return a.start < b.end && b.start < a.end
 }
+
+export function fmt(mins: number) {
+  const h = Math.floor(mins / 60)
+  const m = mins % 60
+  return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`
+}

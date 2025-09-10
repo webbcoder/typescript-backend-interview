@@ -1,10 +1,13 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common'
+import { Student } from '@prisma/client'
 
 import { StudentEnrollDto } from './dto/student-enroll.dto'
 
 import { StudentRepository } from './student.repository'
 import { SectionRepository } from '../section/section.repository'
 import { ClassroomRepository } from '../classroom/classroom.reposytory'
+
+import { fmt, timeDateToMinutes } from '../common/utils/time.utils'
 
 @Injectable()
 export class StudentService {
@@ -13,6 +16,10 @@ export class StudentService {
     private readonly sectionRepository: SectionRepository,
     private readonly classroomRepository: ClassroomRepository,
   ) {}
+
+  async findOne(id: string): Promise<Student> {
+    return this.repository.findUnique({ id })
+  }
 
   async enroll(studentId: string, payload: StudentEnrollDto) {
     const [student, section] = await Promise.all([
@@ -74,5 +81,31 @@ export class StudentService {
       },
       orderBy: [{ createdAt: 'asc' }],
     })
+  }
+
+  async scheduleForPdf(id: string) {
+    const student = await this.repository.findUnique(
+      { id },
+      {
+        enrollments: {
+          include: {
+            section: { include: { subject: true, teacher: true, classroom: true, days: true } },
+          },
+        },
+      },
+    )
+
+    if (!student) throw new NotFoundException('Student not exists')
+
+    return student.enrollments.map(e => ({
+      sectionId: e.sectionId,
+      subjectCode: e.section.subject.code,
+      subjectTitle: e.section.subject.title,
+      teacher: e.section.teacher.name,
+      classroom: e.section.classroom.name,
+      days: e.section.days.map(d => d.day),
+      start: fmt(timeDateToMinutes(e.section.startTime)),
+      end: fmt(timeDateToMinutes(e.section.endTime)),
+    }))
   }
 }

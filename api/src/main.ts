@@ -17,6 +17,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }))
   app.enableVersioning({
     type: VersioningType.URI,
+    defaultVersion: '1',
   })
   app.setGlobalPrefix('api')
 

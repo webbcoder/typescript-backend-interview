@@ -13,4 +13,7 @@ export class UserDto {
 
   @Expose()
   email: string
+
+  @Expose()
+  role: string
 }

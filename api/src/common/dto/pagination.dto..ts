@@ -4,10 +4,10 @@ export class PaginationDto {
   @IsOptional()
   @IsInt()
   @Min(0)
-  offset?: number = 0
+  skip?: number = 0
 
   @IsOptional()
   @IsInt()
   @Min(1)
-  limit?: number = 25
+  take?: number = 25
 }

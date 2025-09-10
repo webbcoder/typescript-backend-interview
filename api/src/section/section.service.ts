@@ -63,7 +63,7 @@ export class SectionService {
     const overlapping = await this.repository.findAll({
       where: {
         OR: [{ teacherId: dto.teacherId }, { classroomId: dto.classroomId }],
-        days: { some: { day: { in: dayList as any } } },
+        days: { some: { day: { in: dayList } } },
       },
       include: { days: true },
     })

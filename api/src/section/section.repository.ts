@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { Prisma } from '@prisma/client'
+import { Prisma, StudentSection } from '@prisma/client'
 
 import { PrismaService } from '../prisma/prisma.service'
 
@@ -24,9 +24,24 @@ export class SectionRepository {
     return this.prisma.section.create({ data, include })
   }
 
+  async createStudentSection<T extends Prisma.StudentSectionInclude | undefined>(
+    data: Prisma.StudentSectionCreateInput,
+    include?: T,
+  ): Promise<Prisma.StudentSectionGetPayload<{ include: T }>> {
+    return this.prisma.studentSection.create({ data, include })
+  }
+
   async studentSectionList<T extends Prisma.StudentSectionFindManyArgs>(
     args: Prisma.SelectSubset<T, Prisma.StudentSectionFindManyArgs>,
   ): Promise<Prisma.StudentSectionGetPayload<T>[] | null> {
     return this.prisma.studentSection.findMany(args)
+  }
+
+  async studentSectionCount(where: Prisma.StudentSectionWhereInput): Promise<number> {
+    return this.prisma.studentSection.count({ where })
+  }
+
+  async studentSectionDelete(where: Prisma.StudentSectionWhereUniqueInput): Promise<StudentSection> {
+    return this.prisma.studentSection.delete({ where })
   }
 }

@@ -1,6 +1,6 @@
 import { IsUUID } from 'class-validator'
 
-export class StudentEnrollDTO {
+export class StudentEnrollDto {
   @IsUUID()
   sectionId!: string
 }

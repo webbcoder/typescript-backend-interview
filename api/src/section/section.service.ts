@@ -2,7 +2,7 @@ import { Injectable, BadRequestException } from '@nestjs/common'
 import { Section } from '@prisma/client'
 
 import { SectionRepository } from './section.repository'
-import { SectionWithIncludes, SectionOrderBy } from './types'
+import { SectionWithIncludes, SectionOrderBy, SectionWithDays } from './types'
 import { TIME_RANGE, DURATION } from './constants'
 import { DayOfWeek } from './enums/day-of-week.enum'
 
@@ -26,7 +26,7 @@ export class SectionService {
     return this.repository.findAll({ skip, take, include, orderBy })
   }
 
-  async create(payload: SectionCreateDto): Promise<Section> {
+  async create(payload: SectionCreateDto): Promise<SectionWithDays> {
     const startMins = parseHmToMinutes(payload.startTime)
     const endMins = parseHmToMinutes(payload.endTime)
 

@@ -1,4 +1,4 @@
-import { Controller, Param, Post, Body, Delete, Get, Res } from '@nestjs/common'
+import { Controller, Param, Post, Body, Delete, Get, Res, NotFoundException } from '@nestjs/common'
 import { Response } from 'express'
 
 import { StudentService } from './student.service'
@@ -19,8 +19,10 @@ export class StudentController {
 
   @Get('schedule/pdf')
   async schedulePdf(@Param('id') id: string, @Res() res: Response) {
+    const student = await this.studentService.findOne(id)
+    if (!student) throw new NotFoundException('Student not exists')
     const rows = await this.studentService.scheduleForPdf(id)
-    const pdf = await this.pdf.buildStudentSchedulePdf(id, rows)
+    const pdf = await this.pdf.buildStudentSchedulePdf(student.name, rows)
     res.setHeader('Content-Type', 'application/pdf')
     res.setHeader('Content-Disposition', `attachment; filename="schedule-${id}.pdf"`)
     return res.send(pdf)

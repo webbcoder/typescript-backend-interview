@@ -15,7 +15,7 @@ export class PdfService {
         doc.on('end', () => resolve(Buffer.concat(chunks)))
       })
 
-      doc.fontSize(18).text(`Schedule for ${studentName}`, { align: 'left' }).moveDown(1)
+      doc.fontSize(18).text(`Schedule for ${studentName.toUpperCase()}`, { align: 'left' }).moveDown(1)
 
       doc
         .fontSize(12)

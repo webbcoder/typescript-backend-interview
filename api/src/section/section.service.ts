@@ -1,4 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common'
+import { Section } from '@prisma/client'
 
 import { SectionRepository } from './section.repository'
 import { SectionWithIncludes, SectionOrderBy } from './types'
@@ -14,6 +15,10 @@ import { parseHmToMinutes } from '../common/utils/time.utils'
 export class SectionService {
   constructor(private readonly repository: SectionRepository) {}
 
+  async findOne(id: string): Promise<Section> {
+    return this.repository.findUnique({ id })
+  }
+
   async findall(params: PaginationDto): Promise<SectionWithIncludes[]> {
     const { skip, take } = params
     const include = { subject: true, teacher: true, classroom: true, days: true }
@@ -21,7 +26,7 @@ export class SectionService {
     return this.repository.findAll({ skip, take, include, orderBy })
   }
 
-  async create(payload: SectionCreateDto) {
+  async create(payload: SectionCreateDto): Promise<Section> {
     const startMins = parseHmToMinutes(payload.startTime)
     const endMins = parseHmToMinutes(payload.endTime)
 

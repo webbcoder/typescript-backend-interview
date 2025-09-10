@@ -7,7 +7,7 @@ import { StudentEnrollDto } from './dto/student-enroll.dto'
 export class StudentController {
   constructor(private studentService: StudentService) {}
 
-  @Get(':id/schedule')
+  @Get('schedule')
   schedule(@Param('id') id: string) {
     return this.studentService.schedule(id)
   }

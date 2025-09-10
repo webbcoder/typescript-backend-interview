@@ -9,6 +9,7 @@ import { StudentModule } from './student/student.module'
 import { SectionModule } from './section/section.module'
 import { ClassroomModule } from './classroom/classroom.module'
 import { PdfModule } from './pdf/pdf.module'
+import { AuthModule } from './auth/auth.module'
 import config from './config'
 
 @Module({
@@ -24,6 +25,7 @@ import config from './config'
     SectionModule,
     ClassroomModule,
     PdfModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,15 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import PDFDocument from 'pdfkit'
 
-export type ScheduleRow = {
-  subjectCode: string
-  subjectTitle: string
-  teacher: string
-  classroom: string
-  days: string[]
-  start: string
-  end: string
-}
+import { ScheduleRow } from './types/row.type'
 
 @Injectable()
 export class PdfService {

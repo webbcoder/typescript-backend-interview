@@ -17,6 +17,7 @@ describe('AuthService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined()
   })
+
   it('should throw UnauthorizedException if authHeader is missing', () => {
     expect(() => service.validateUser(null)).rejects.toThrow(UnauthorizedException)
     expect(() => service.validateUser('')).rejects.toThrow(UnauthorizedException)

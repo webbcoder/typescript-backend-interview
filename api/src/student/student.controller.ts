@@ -20,7 +20,7 @@ export class StudentController {
   @Get('schedule/pdf')
   async schedulePdf(@Param('id') id: string, @Res() res: Response) {
     const rows = await this.studentService.scheduleForPdf(id)
-    const pdf = this.pdf.buildStudentSchedulePdf(id, rows)
+    const pdf = await this.pdf.buildStudentSchedulePdf(id, rows)
     res.setHeader('Content-Type', 'application/pdf')
     res.setHeader('Content-Disposition', `attachment; filename="schedule-${id}.pdf"`)
     return res.send(pdf)

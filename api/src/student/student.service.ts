@@ -5,7 +5,7 @@ import { StudentEnrollDto } from './dto/student-enroll.dto'
 
 import { StudentRepository } from './student.repository'
 import { SectionRepository } from '../section/section.repository'
-import { ClassroomRepository } from '../classroom/classroom.reposytory'
+import { ClassroomRepository } from '../classroom/classroom.repository'
 
 import { fmt, timeDateToMinutes } from '../common/utils/time.utils'
 

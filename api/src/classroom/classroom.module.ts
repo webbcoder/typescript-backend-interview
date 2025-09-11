@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
 
-import { ClassroomRepository } from './classroom.reposytory'
+import { ClassroomRepository } from './classroom.repository'
 
 @Module({
   providers: [ClassroomRepository],

@@ -1,0 +1,10 @@
+model StudentSection {
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  studentId String  @default(uuid()) @map("student_id") @db.Uuid
+  section   Section @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  sectionId String  @default(uuid()) @map("section_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+
+  @@id([studentId, sectionId])
+}

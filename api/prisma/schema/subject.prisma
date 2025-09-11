@@ -1,0 +1,10 @@
+model Subject {
+  id    String @id @default(uuid()) @db.Uuid
+  code  String @unique
+  title String
+
+  sections Section[]
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz()
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+}

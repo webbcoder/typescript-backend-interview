@@ -20,3 +20,6 @@ If you’d like to build a more feature-rich application to better showcase your
 
 ## Setup
 The application is already scaffolded for you, you can start by running `docker-compose up`. This will start the database. The backend is in the `api` folder. Before running `npm start` or `npm start:dev` in the `api` folder you should run `npm run prisma:generate:client`, `npm run prisma:migrate:deploy`, and `npx prisma db seed` to seed the db with default data. First command will create all of the Prisma types for you, the second will create the database schema, and the third will seed the database with some initial data.
+
+## Postman
+To use Postman set up `Authorization` `Auth Type` `Basic Auth` `Username: testuser@example.com` `Password: testpassword`, or any other data from the user after running `seeds`
